@@ -16,6 +16,9 @@ import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
+import com.google.appengine.api.taskqueue.Queue;
+import com.google.appengine.api.taskqueue.QueueFactory;
+import com.google.appengine.api.taskqueue.TaskOptions;
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
@@ -65,8 +68,12 @@ public class ManageCrawls extends HttpServlet {
 
 		switch (request.getParameter("action")) {
 		case "add":
-			new Site(user, URI.create(request.getParameter("uri")))
-					.save(datastore);
+			Key siteKey = new Site(user,
+					URI.create(request.getParameter("uri"))).save(datastore);
+			Queue queue = QueueFactory.getDefaultQueue();
+			queue.add(TaskOptions.Builder.withUrl("/crawler")
+					.param("uri", request.getParameter("uri"))
+					.param("siteKey", KeyFactory.keyToString(siteKey)));
 			break;
 		case "delete":
 			Key k = KeyFactory.createKey("Site",
