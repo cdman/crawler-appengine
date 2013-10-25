@@ -1,6 +1,6 @@
 import org.junit.Before;
 import org.junit.Test;
-import ro.gdgs.crawler.web.GreetServlet;
+import ro.gdgs.crawler.web.ManageCrawls;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -18,11 +18,11 @@ import static org.mockito.Mockito.when;
  * @since 1.0
  */
 public class GreetServletTest {
-    private GreetServlet greetServlet;
+    private ManageCrawls greetServlet;
 
     @Before
     public void setupGuestBookServlet() {
-        greetServlet = new GreetServlet();
+        greetServlet = new ManageCrawls();
     }
 
     @Test

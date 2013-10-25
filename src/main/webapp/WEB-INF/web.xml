@@ -6,15 +6,25 @@
         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
     <servlet>
-        <servlet-name>greet</servlet-name>
-        <servlet-class>ro.gdgs.crawler.web.GreetServlet</servlet-class>
+        <servlet-name>crawls</servlet-name>
+        <servlet-class>ro.gdgs.crawler.web.ManageCrawls</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>greet</servlet-name>
-        <url-pattern>/greet</url-pattern>
+        <servlet-name>crawls</servlet-name>
+        <url-pattern>/crawls</url-pattern>
     </servlet-mapping>
 
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>crawls</web-resource-name>
+            <url-pattern>/crawls*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>*</role-name>
+        </auth-constraint>
+    </security-constraint>
+
     <welcome-file-list>
-        <welcome-file>index.html</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
 </web-app>

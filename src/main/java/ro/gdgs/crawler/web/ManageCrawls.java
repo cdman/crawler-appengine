@@ -11,7 +11,7 @@ import java.io.PrintWriter;
  * @author Octavian
  * @since 1.0
  */
-public class GreetServlet extends HttpServlet {
+public class ManageCrawls extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/plain");
